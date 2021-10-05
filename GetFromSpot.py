@@ -233,7 +233,7 @@ while True:
         for i in range(1,len(user)):
             SPOT = getSPOT(user[i][0])
 
-            if SPOT.transmissionAge < 2000: #2000: #30 mins and recent, only
+            if SPOT.transmissionAge < 3000: #2000: #50 mins and recent, only
                 print('Tracking',user[i][2],SPOT.user,SPOT.transmissionAge,'seconds ago')
 
                 #test encode parameters: -- works
