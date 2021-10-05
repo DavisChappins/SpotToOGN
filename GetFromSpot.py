@@ -22,15 +22,14 @@ import requests
 import xmltodict
 
 
+
 global APRSbeacon
 
 class aircraft():
     def __init__(self):
         self.user = ''
         self.latitude = ''
-        self.latitudeNS = ''
         self.longitude = ''
-        self.longitudeEW = ''
         self.altitude = ''
         self.groundSpeed = ''
         self.heading = ''
@@ -42,9 +41,7 @@ class getSPOT():
     def __init__(self, user):
         self.user = user
         self.latitude = ''
-        self.latitudeNS = ''
         self.longitude = ''
-        self.longitudeEW = ''
         self.altitude = ''
         self.groundSpeed = ''
         self.heading = ''
@@ -64,15 +61,8 @@ class getSPOT():
             #get decimal
             lat_d = math.trunc(lat_f)
             lat_s = str(lat_d)
-            #get minutes and get N or S
-            if lat_d > 0:
-                lat_m = round((lat_f*60) % 60,2)
-                self.latitudeNS = 'N'
-             else:
-                lat_m = round((lat_f*-1*60) % 60,2)
-                self.latitudeNS = 'S'
-                lat_d = abs(lat_d)
-            
+            #get minutes
+            lat_m = round((lat_f*60) % 60,2)
             lat_m_s = "{:.2f}".format(lat_m)
             lat_m_afterDec = lat_m_s[-2:]
             #isolate minutes only
@@ -87,19 +77,12 @@ class getSPOT():
             #find longitude
             lon = data['response']['feedMessageResponse']['messages']['message'][0]['longitude']
             lon_f = float(lon)
-            #lon_f = lon_f * -1  #only works in North America
+            lon_f = lon_f * -1  #only works in North America
             #get decimal
             lon_d = math.trunc(lon_f)
             lon_s = str(lon_d)
-            #get minutes and get E or W
-            if lon_d > 0:
-                lon_m = round((lon_f*60) % 60,2)
-                self.longtiudeEW = 'E'
-            else:
-                lon_m = round((lon_f*-1*60) % 60,2)
-                self.longitudeEW = 'W'
-                lon_d = abs(lon_d)
-            
+            #get minutes
+            lon_m = round((lon_f*60) % 60,2)
             lon_m_s = "{:.2f}".format(lon_m)
             lon_m_afterDec = lon_m_s[-2:]
             #isolate minutes only
@@ -150,8 +133,12 @@ def openClient():
             time.sleep(.01)
         except:
             pass
+    #time.sleep(1)
+
+
 
 #main
+
 
 APRS_SERVER_PUSH = 'glidern2.glidernet.org'
 APRS_SERVER_PORT =  14580 #10152
@@ -171,6 +158,8 @@ with open('user.csv', 'r') as read_obj:
     csv_reader = csv.reader(read_obj)
     user = list(csv_reader)
 
+print(user)
+
 ##connect to to the APRS server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((APRS_SERVER_PUSH, APRS_SERVER_PORT))
@@ -188,6 +177,7 @@ data = sock.recv(BUFFER_SIZE)
 print("APRS Login reply:  ", data) #server response
 
 #callsign/pass generator at https://www.george-smart.co.uk/aprs/aprs_callpass/
+
 
 startTime = time.time()
 
@@ -221,11 +211,12 @@ while True:
                 ICAO = 'ICA' + user[i][1]           #   'FLRDDBA99'
                 APRS_stuff = '>APRS,qAS,SPOT:/'
                 time_UTC = SPOT.timeUTC              
-                lat = SPOT.latitude + SPOT.latitudeNS     #'N'        #   '3300.02N'
-                lon = SPOT.longitude + SPOT.longitudeEW   # 'W'       #   '11200.00W'
+                lat = SPOT.latitude + 'N'        #   '3300.02N'
+                lon = SPOT.longitude + 'W'       #   '11200.00W'
                 ac_type = "'"
                 heading = SPOT.heading           #   '000' 
                 speed = '000'         #   '000'
+                #print('speed',speed)
                 alt = SPOT.altitude              #   '001368'
                 ICAO_id = 'id3D'+ ICAO[3:]
                 climb = ' +' + '000' 
@@ -250,11 +241,43 @@ while True:
                     except:
                         print('error encoding somehow')
                         pass
+                        
+                     
+                    #sock_localhost.send(encode_test_ICAO.encode())
+        #APRS_KEEPALIVE = "FLR010101>APRS,qAS,NONE:/" + timenow + "h0000.02S/00000.88E'000/000/A=001368 !W00! id3D010101 +000fpm +0.0rot 11.1dB 0e +1.1kHz gps2x3"
         try:
             sock.send('#keepalive\n'.encode())
             #print('Sending APRS keep alive')
         except:
             print('error encoding somehow')
-        time.sleep(3) #request of spot API to wait 2secs between API calls for multiple users
+        time.sleep(2) #request of spot API to wait 2secs between API calls for multiple users
     time.sleep(.09)
- 
+    #time.sleep(300) #temporary for testing
+
+    
+
+
+
+
+#while loop end---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
