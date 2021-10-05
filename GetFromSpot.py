@@ -36,7 +36,7 @@ class aircraft():
         self.groundSpeed = ''
         self.heading = ''
         self.timeUTC = ''
-        self.transmissionAge = ''
+        self.transmissionAge = 10000
 
 
 class getSPOT():
@@ -50,7 +50,7 @@ class getSPOT():
         self.groundSpeed = ''
         self.heading = ''
         self.timeUTC = ''
-        self.transmissionAge = ''
+        self.transmissionAge = 10000
         
 
         url = "https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/" + user + "/latest.xml"
