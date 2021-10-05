@@ -56,7 +56,10 @@ class getSPOT():
 
         try:
             #find latitude
-            lat = data['response']['feedMessageResponse']['messages']['message'][0]['latitude']
+            try:
+                lat = data['response']['feedMessageResponse']['messages']['message'][0]['latitude']
+            except:
+                lat = data['response']['feedMessageResponse']['messages']['message']['latitude']
             lat_f = float(lat)
             #get decimal
             lat_d = math.trunc(lat_f)
@@ -75,7 +78,10 @@ class getSPOT():
 
 
             #find longitude
-            lon = data['response']['feedMessageResponse']['messages']['message'][0]['longitude']
+            try:
+                lon = data['response']['feedMessageResponse']['messages']['message'][0]['longitude']
+            except:
+                lon = data['response']['feedMessageResponse']['messages']['message']['longitude']
             lon_f = float(lon)
             lon_f = lon_f * -1  #only works in North America
             #get decimal
@@ -95,7 +101,10 @@ class getSPOT():
 
 
             #find elevation (meters)
-            elev_s = data['response']['feedMessageResponse']['messages']['message'][0]['altitude']
+            try:
+                elev_s = data['response']['feedMessageResponse']['messages']['message'][0]['altitude']
+            except:
+                elev_s = data['response']['feedMessageResponse']['messages']['message']['altitude']
             elev_f = float(elev_s)
             elev = int(elev_f * 3.28084) #change to feet (from m)
             elev = "{:06d}".format(elev)
@@ -103,7 +112,10 @@ class getSPOT():
             self.altitude = elev
 
             #find time UTC of transmission
-            timeUTC_time = data['response']['feedMessageResponse']['messages']['message'][0]['unixTime']
+            try:
+                timeUTC_time = data['response']['feedMessageResponse']['messages']['message'][0]['unixTime']
+            except:
+                timeUTC_time = data['response']['feedMessageResponse']['messages']['message']['unixTime']
             timeUTC_time_i = int(timeUTC_time) + 25200 #convert to UTC time, 7 hour difference
             time_UTC_str = datetime.fromtimestamp(timeUTC_time_i).strftime("%H%M%S")# - timedelta(hours=7)
             #print('formatted time:',time_UTC_str)
@@ -252,32 +264,5 @@ while True:
             print('error encoding somehow')
         time.sleep(2) #request of spot API to wait 2secs between API calls for multiple users
     time.sleep(.09)
-    #time.sleep(300) #temporary for testing
 
     
-
-
-
-
-#while loop end---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
