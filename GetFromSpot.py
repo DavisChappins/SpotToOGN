@@ -272,14 +272,11 @@ while True:
                         print('error encoding somehow')
                         pass
                         
-                     
-                    #sock_localhost.send(encode_test_ICAO.encode())
-        #APRS_KEEPALIVE = "FLR010101>APRS,qAS,NONE:/" + timenow + "h0000.02S/00000.88E'000/000/A=001368 !W00! id3D010101 +000fpm +0.0rot 11.1dB 0e +1.1kHz gps2x3"
         try:
             sock.send('#keepalive\n'.encode())
             #print('Sending APRS keep alive')
         except:
             print('error encoding somehow')
-        time.sleep(2) #request of spot API to wait 2secs between API calls for multiple users
+        time.sleep(3) #request of spot API to wait 2secs between API calls for multiple users
     time.sleep(.09)
-    #time.sleep(300) #temporary for testing
+
