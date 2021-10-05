@@ -187,8 +187,7 @@ time.sleep(2)
 with open('user.csv', 'r') as read_obj:
     csv_reader = csv.reader(read_obj)
     user = list(csv_reader)
-
-print(user)
+#print(user)
 
 ##connect to to the APRS server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
