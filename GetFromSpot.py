@@ -1,15 +1,16 @@
 import urllib.request
 from os import path
 from datetime import datetime
+from ogn.client import AprsClient
+from ogn.parser import parse, ParseError
+from datetime import datetime, timedelta
+from time import sleep  
+from ctypes import *
 import math
 import threading
 import argparse
 import traceback
-
-from ogn.client import AprsClient
-from ogn.parser import parse, ParseError
-from datetime import datetime, timedelta
-from ctypes import *
+import csv
 import socket
 import time
 import sys
@@ -20,7 +21,6 @@ import atexit
 import requests
 import xmltodict
 
-from time import sleep  
 
 global APRSbeacon
 
@@ -49,13 +49,8 @@ class getSPOT():
         
 
         url = "https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/" + user + "/latest.xml"
-        #fake_url = "https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/0TgahSSUoPyZax7vnJ0IUpuGLoPM6zEgD/latest.xml"
-        #print(url)
-        #response = urllib.request.urlopen(url)
         response = requests.get(url)
         data = xmltodict.parse(response.content)
-        #text = data.decode('utf-8')
-        #print(data)
 
 
         try:
@@ -137,26 +132,8 @@ def openClient():
             time.sleep(.01)
         except:
             pass
-        '''except ParseError as e:
-            print('Error, {}'.format(e.message))
-            print('aprs parse error')
-            pass
-            
-        except NotImplementedError as e:
-            print('{}: {}'.format(e, raw_message))
-            print('aprs not implemented error')
-            pass
-            
-        except KeyboardInterrupt:
-            print('\nStop ogn gateway')
-            client.disconnect()
-            pass'''
-    #time.sleep(1)
-
-
 
 #main
-
 
 APRS_SERVER_PUSH = 'glidern2.glidernet.org'
 APRS_SERVER_PORT =  14580 #10152
@@ -166,27 +143,25 @@ APRS_FILTER = 'g/ALL'
 
 traffic_list = []
 
-####------APRS encode----
-#def APRS_encode():
-    
+#Get most recent user list from Github
+urllib.request.urlretrieve("https://raw.githubusercontent.com/DavisChappins/SpotToOGN/main/user.csv", "user.csv")
+print('Downloading user.csv from https://raw.githubusercontent.com/DavisChappins/SpotToOGN/main/user.csv')
+time.sleep(2)
 
+#assign Github user list to user
+with open('user.csv', 'r') as read_obj:
+    csv_reader = csv.reader(read_obj)
+    user = list(csv_reader)
 
-#localhost for testing
-#sock_localhost = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#sock_localhost.connect(('localhost', 14580))
-
-#####-----connect to to the APRS server-------------------- works
+##connect to to the APRS server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((APRS_SERVER_PUSH, APRS_SERVER_PORT))
-
-#self.sock_file = self.sock.makefile('rb')
 sock_file = sock.makefile('rb')
 
 data = sock.recv(BUFFER_SIZE)
 print("APRS Login reply:  ", data) #server response
 
-
-#####-----login to APRS server ---------------- works
+#login to APRS server
 login = 'user SPOT pass 28646 vers SPOTPushClient 0.1 filter r/33/-112/10 \n'
 login = login.encode(encoding='utf-8', errors='strict')
 sock.send(login)
@@ -195,11 +170,6 @@ data = sock.recv(BUFFER_SIZE)
 print("APRS Login reply:  ", data) #server response
 
 #callsign/pass generator at https://www.george-smart.co.uk/aprs/aprs_callpass/
-
-user = {0:['0TgahSSUoPyZax7vnJ0IUpuGLoPM6zEgD','A0766D','Mark Donnelly']
-        }
-
-# https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/0TgahSSUoPyZax7vnJ0IUpuGLoPM6zEgD/latest.xml
 
 startTime = time.time()
 
@@ -216,44 +186,15 @@ while True:
     fiveMinuteTimer = timer % 300   #300 seconds in 5 min, if >299.9 then action
     threeMinuteTimer = timer % 180   #180 seconds in 3 min, if >179.9 then action
     tenSecondTimer = timer % 10   #10 seconds in 10 s, if >9.9 then action
-    #print('fiveMinuteTimer',fiveMinuteTimer)
-    #print('threeMinuteTimer',threeMinuteTimer)
     timenow = datetime.utcnow().strftime("%H%M%S")
-    #print(round(fiveMinuteTimer,2))
-    #####-----read data from APRS server
-    #openClient() #run separate thread to read APRS data
-    '''try:
-        packet_b = sock_file.readline().strip()
-        packet_str = packet_b.decode(errors="replace") #if ignore_decoding_error else packet_b.decode()
-        #print(packet_str)
-        APRSbeacon = parse(packet_str)
-        #print(APRSbeacon)
-    except ParseError as e:
-        print('Error, {}'.format(e.message))
-        break
-    except NotImplementedError as e:
-        print('{}: {}'.format(e, raw_message))
-        break'''
 
-    #get SPOT
+    #get SPOT location
     #if tenSecondTimer > 9.9: #9.9
     if threeMinuteTimer > 179.9: #179.9
         print('Local time:',datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),'Uptime:',int(timer//3600),'hours',int((timer%3600)//60),'minutes',int((timer%3600)%60),'seconds')
         
-        for i in range(len(user)):
-            #print('--------',user[i][0],'--------')
-            #traffic_list = aircraft()
-            #print(user[i][0])
+        for i in range(1,len(user)):
             SPOT = getSPOT(user[i][0])
-            #traffic_list[i] = SPOT
-            #print(traffic_list[i].user)
-
-            #APRS_TEST = "FLRDDBA99>APRS,qAS,YMCF:/174125h2700.02S/15100.88E'000/000/A=001368 !W01! id06DDBA99 +000fpm +0.0rot 44.4dB 0e +1.1kHz gps2x3"
-
-            #APRS_TEST_1st = "FLRDDBA99>APRS,qAS,SPOT:/"
-            #APRS_TEST_2nd = "h3300.02N/11200.88W'000/000/A=001368 !W01! id06DDBA99 +000fpm +0.0rot 11.1dB 0e +0.0kHz gps2x3\n"
-            #APRS_TEST = APRS_TEST_1st + timenow + APRS_TEST_2nd
-            #sock.send(APRS_TEST.encode())
 
             if SPOT.transmissionAge < 2000: #2000: #30 mins and recent, only
                 print('Tracking',user[i][2],SPOT.user,SPOT.transmissionAge,'seconds ago')
@@ -303,32 +244,4 @@ while True:
             print('error encoding somehow')
         time.sleep(2) #request of spot API to wait 2secs between API calls for multiple users
     time.sleep(.09)
-    #time.sleep(300) #temporary for testing
-
-    
-
-
-
-
-#while loop end---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
