@@ -3,14 +3,14 @@ This script grabs SPOT location data from [user.csv](https://github.com/DavisCha
 It's currently running on my local machine from 10a to 8p AZ time, 7 days a week.
   
 ## How can I add my SPOT?
-First, [enable an XML feed](https://www.findmespot.com/en-us/support/spot-x/get-help/general/spot-api-support) then fill out the google form at https://forms.gle/WN3YLVJvL5pp7feq6  
+First, [enable an XML feed](https://www.findmespot.com/en-us/support/spot-x/get-help/general/spot-api-support) then fill out the google form at https://forms.gle/KxWvSTnmL9XkKg2V6  
 You will need:
 * An XML FEED ID
 * The N number or ICAO id of your aircraft
 * Your name
 
 ## How can I tell if it is running?
-After turning on your SPOT device, your position may take 5-15 minutes to appear. If your position is not valid or is older than 30 minutes at maps.findmespot.com you will not appear. Ensure your username and aircraft info is in the [user.csv](https://github.com/DavisChappins/SpotToOGN/blob/main/user.csv) file. The csv file is updated by filling out [this google form](https://forms.gle/WN3YLVJvL5pp7feq6  ). If you have recently filled out the form it may take a short amount of time for your info to be added.  
+After turning on your SPOT device, your position may take 5-15 minutes to appear. If your position is not valid or is older than 30 minutes at maps.findmespot.com you will not appear. Ensure your username and aircraft info is in the [user.csv](https://github.com/DavisChappins/SpotToOGN/blob/main/user.csv) file. The csv file is updated by filling out [this google form](https://forms.gle/KxWvSTnmL9XkKg2V6). If you have recently filled out the form it may take a short amount of time for your info to be added.  
 The script connects to http://glidern2.glidernet.org:14501/ ctrl+f for "SPOT" to verify the script is connected and running.  
 
 ## What does it look like on a map?
