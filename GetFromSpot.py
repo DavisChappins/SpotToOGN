@@ -29,7 +29,9 @@ class aircraft():
     def __init__(self):
         self.user = ''
         self.latitude = ''
+        self.latitudeNS = ''
         self.longitude = ''
+        self.longitudeEW = ''
         self.altitude = ''
         self.groundSpeed = ''
         self.heading = ''
@@ -41,7 +43,9 @@ class getSPOT():
     def __init__(self, user):
         self.user = user
         self.latitude = ''
+        self.latitudeNS = ''
         self.longitude = ''
+        self.longitudeEW = ''
         self.altitude = ''
         self.groundSpeed = ''
         self.heading = ''
@@ -64,8 +68,15 @@ class getSPOT():
             #get decimal
             lat_d = math.trunc(lat_f)
             lat_s = str(lat_d)
-            #get minutes
-            lat_m = round((lat_f*60) % 60,2)
+            #get minutes and get N or S
+            if lat_d > 0:
+                lat_m = round((lat_f*60) % 60,2)
+                self.latitudeNS = 'N'
+            else:
+                lat_m = round((lat_f*-1*60) % 60,2)
+                self.latitudeNS = 'S'
+                lat_d = abs(lat_d)
+                
             lat_m_s = "{:.2f}".format(lat_m)
             lat_m_afterDec = lat_m_s[-2:]
             #isolate minutes only
@@ -83,12 +94,19 @@ class getSPOT():
             except:
                 lon = data['response']['feedMessageResponse']['messages']['message']['longitude']
             lon_f = float(lon)
-            lon_f = lon_f * -1  #only works in North America
+            #lon_f = lon_f * -1  #only works in North America
             #get decimal
             lon_d = math.trunc(lon_f)
             lon_s = str(lon_d)
-            #get minutes
-            lon_m = round((lon_f*60) % 60,2)
+            #get minutes and get E or W
+            if lon_d > 0:
+                lon_m = round((lon_f*60) % 60,2)
+                self.longtiudeEW = 'E'
+            else:
+                lon_m = round((lon_f*-1*60) % 60,2)
+                self.longitudeEW = 'W'
+                lon_d = abs(lon_d)
+            
             lon_m_s = "{:.2f}".format(lon_m)
             lon_m_afterDec = lon_m_s[-2:]
             #isolate minutes only
@@ -223,8 +241,8 @@ while True:
                 ICAO = 'ICA' + user[i][1]           #   'FLRDDBA99'
                 APRS_stuff = '>APRS,qAS,SPOT:/'
                 time_UTC = SPOT.timeUTC              
-                lat = SPOT.latitude + 'N'        #   '3300.02N'
-                lon = SPOT.longitude + 'W'       #   '11200.00W'
+                lat = SPOT.latitude + SPOT.latitudeNS   #'N'        #   '3300.02N'
+                lon = SPOT.longitude + SPOT.longitudeEW   #'W'       #   '11200.00W'
                 ac_type = "'"
                 heading = SPOT.heading           #   '000' 
                 speed = '000'         #   '000'
@@ -264,5 +282,4 @@ while True:
             print('error encoding somehow')
         time.sleep(2) #request of spot API to wait 2secs between API calls for multiple users
     time.sleep(.09)
-
-    
+    #time.sleep(300) #temporary for testing
