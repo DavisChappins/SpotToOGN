@@ -227,8 +227,8 @@ while True:
     timenow = datetime.utcnow().strftime("%H%M%S")
 
     #get SPOT location
-    #if tenSecondTimer > 9.9: #9.9
-    if threeMinuteTimer > 179.9: #179.9
+    if tenSecondTimer > 9.9: #9.9 with 2s per user over 90 users just use this timer
+    #if threeMinuteTimer > 179.9: #179.9
         print('Local time:',datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),'Uptime:',int(timer//3600),'hours',int((timer%3600)//60),'minutes',int((timer%3600)%60),'seconds')
         
         for i in range(1,len(user)):
