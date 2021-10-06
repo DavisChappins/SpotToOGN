@@ -52,10 +52,12 @@ class getSPOT():
         self.timeUTC = ''
         self.transmissionAge = 10000
         
-
-        url = "https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/" + user + "/latest.xml"
-        response = requests.get(url)
-        data = xmltodict.parse(response.content)
+        try:
+            url = "https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/" + user + "/latest.xml"
+            response = requests.get(url)
+            data = xmltodict.parse(response.content)
+        except:
+            print('error parsing url:',user)
 
 
         try:
@@ -67,7 +69,6 @@ class getSPOT():
             lat_f = float(lat)
             #get decimal
             lat_d = math.trunc(lat_f)
-            lat_s = str(lat_d)
             #get minutes and get N or S
             if lat_d > 0:
                 lat_m = round((lat_f*60) % 60,2)
@@ -76,7 +77,7 @@ class getSPOT():
                 lat_m = round((lat_f*-1*60) % 60,2)
                 self.latitudeNS = 'S'
                 lat_d = abs(lat_d)
-                
+            lat_s = str(lat_d)    
             lat_m_s = "{:.2f}".format(lat_m)
             lat_m_afterDec = lat_m_s[-2:]
             #isolate minutes only
@@ -96,8 +97,7 @@ class getSPOT():
             lon_f = float(lon)
             #lon_f = lon_f * -1  #only works in North America
             #get decimal
-            lon_d = math.trunc(lon_f)
-            lon_s = str(lon_d)
+            lon_d = math.trunc(lon_f)            
             #get minutes and get E or W
             if lon_d > 0:
                 lon_m = round((lon_f*60) % 60,2)
@@ -106,7 +106,7 @@ class getSPOT():
                 lon_m = round((lon_f*-1*60) % 60,2)
                 self.longitudeEW = 'W'
                 lon_d = abs(lon_d)
-            
+            lon_s = str(lon_d)
             lon_m_s = "{:.2f}".format(lon_m)
             lon_m_afterDec = lon_m_s[-2:]
             #isolate minutes only
@@ -147,7 +147,8 @@ class getSPOT():
             self.transmissionAge = age_s
 
         except Exception as e:
-            print(e)
+            #print(e)
+            print(user,'has no location messages')
             pass
 
 
@@ -232,10 +233,10 @@ while True:
         
         for i in range(1,len(user)):
             SPOT = getSPOT(user[i][0])
-
+            time.sleep(2) #request of spot API to wait 2secs between API calls for multiple users
             if SPOT.transmissionAge < 3000: #2000: #50 mins and recent, only
                 print('Tracking',user[i][2],SPOT.user,SPOT.transmissionAge,'seconds ago')
-
+                
                 #test encode parameters: -- works
                 ICAO = 'ICA' + user[i][1]           #   'FLRDDBA99'
                 APRS_stuff = '>APRS,qAS,SPOT:/'
@@ -276,6 +277,7 @@ while True:
             #print('Sending APRS keep alive')
         except:
             print('error encoding somehow')
-        time.sleep(3) #request of spot API to wait 2secs between API calls for multiple users
+        
     time.sleep(.09)
+
 
