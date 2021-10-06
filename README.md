@@ -3,9 +3,11 @@ This script grabs SPOT location data from [user.csv](https://github.com/DavisCha
 It's currently running on my local machine from 10a to 8p AZ time, 7 days a week.
   
 ## How can I add my SPOT?
-First, [enable an XML feed](https://www.findmespot.com/en-us/support/spot-x/get-help/general/spot-api-support) then fill out the google form at https://forms.gle/KxWvSTnmL9XkKg2V6  
+First, [enable an XML feed](https://www.findmespot.com/en-us/support/spot-x/get-help/general/spot-api-support).  
+Second, ensure your SPOT XML Feed ID is not already added in the [user.csv](https://github.com/DavisChappins/SpotToOGN/blob/main/user.csv) file in this repository. Ctrl+f for your name or XML Feed ID. The data was pulled from the SSA website.   
+If you do not find your XML Feed ID, fill out the google form at https://forms.gle/KxWvSTnmL9XkKg2V6  
 You will need:
-* An XML FEED ID
+* Your XML FEED ID
 * The N number or ICAO id of your aircraft
 * Your name
 
