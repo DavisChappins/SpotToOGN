@@ -85,22 +85,18 @@ XML Feed ID,icao,name
 04brHKxWq6nb5k1JGoWjzh2ogScWTFBkM,A412F4,Terry Duncan
 07Yf8QW5q6g2Elotqgg2sgSNnTmOA31qL,A3A195,Robert Dunning
 0qe2CClon8EgkgjZVjCyiYNJfuReBF6qh,A2643D,Charles Dutch
-0YU2PbsBxnQLCSCCAsCAP0BIXnpnP10VJ,A8B21A,Leon Edling
 0loLxkH6USUORJjhCsuLVZqoRA2NenyUF,A814B5,Shawn Eggleston
 0lAJMNLe9DtjkrLF9StqF21CSeZTjp9qO,A06ED2,Dan Ernst
 0huT91p7vsyaqEMHMqgKpBkr6gQXExO8m,A27E9C,Jacob Fairbairn
-0qkQpxZWdoPqycfppPEXXk03XOlZniVK0,AC642B,Hartley Falbaum
 0gU1vM6rD0DKYvJ4m5rSDknmMSbz63HSt,A2AEC3,Bob Faris
 0Gb0QX12UYspouVlT3NLIhRd8v9ljgGIn,AD0BB7,Charles Flagg
 0rNr6mWA3bCZmzMXftIU9KLiR77dTqg6J,A2430F,G. Dean Forney
 0xnZksR0ACYRYe7anBdFzKtEsVlkIzthi,A1E5AA,Harry Fox
-0COJQ0NHAuoj5OV9fBTzbRqZGPdgAboyz,A0DE6A,Steve Freeman
 0DUe1lyhZE2gQBxXZSeFKDtF9BFxuaEHb,A31E44,Peter Fuss
 0EnbXVgfdj3eCzO2NWW5uPtVGd7hLzCHs,A97574,David Gaines
 0YpYptYPIYRhxJ3fC25FHlqTvTtmNmWFX,A88BF7,James Garrison
 0LKsP8vqNPQ2XhiehRLXCsgH8CEe5jMq9,A5D751,Heinz Gehlhaar
 04S0uKyc0ISqO34usHMgVeSJWsj5hFBDE,A4F99D,Yuliy Gerchikov
-0KmiUlpYXDRFYJZkojc9X4N2zsTaCmF2q,A2E706,Samuel Giltner
 0100ASPvarBg1bsVoamdfhqp3FDLDpHGr,A0959A,Ray Gimmey
 0loKtqFyVDyTkM0Ols2OZaS6QI9ufus0u,A00426,Ronald Gleason
 0RHXUtft1qGv2klnAnzr4c0lJPbPuqjBq,A2ACA3,John Godfrey
@@ -119,7 +115,6 @@ XML Feed ID,icao,name
 0TkrLO8EJbxqrBnntSaYi0LmF34YaukGr,A2A631,John Hansman
 0OyRTyoBto2uqbjupnxcifaqJzJaT8qQd,A5E6AC,Peter Hartmann
 0uvDifkBFandpXvq51tspxWcxL84deocW,A01348,Mike Havener
-0SGYW1fope9EGAx0Wpbk40EpBqWogpUKf,AD2AF9,Mark Hawkins
 0SXgS114DDQBAezcPi91flkJHAvqiPVJO,A0F09C,David Heffel
 0ZntHJpcGW4c0dgMBsfEsxfs0i1MnemKs,A34632,Rolf Hegele
 0CgZ5mcp139F7lZ3yj6q46jKYBthWTl98,AC6CF8,Steven Henderson
@@ -130,12 +125,9 @@ XML Feed ID,icao,name
 04Gvz15Tc51qmqVXIMRXTr3VXdO2OVo6q,A7C665,Grant Hilty
 0l6SDV6g65dlVtOA3YWmOBoqyubaWUSaY,A0C14D,Robert Hinson
 0QYLfYCeUC80IQUrZdskpp66Ty8B29xiE,A51365,Randall Hollenberg
-0FZQpZ0Lg03Pbf3j8UH1Yc8Gb2PcmfkFN,A30928,G. Hostage
 0gqDG6zZAOjsdcKzmGFdO24aXHCCJHIvL,A32086,John House
 0HfFqq3eolKQ1ZbGg3vAhoKB1s6CP4nqv,A0F06F,Rus Howard
-0ZJtnx9a1F2vEmBPPRG2lW5zzMY99nXmr,A1934D,Michael  Hunter
 0cyYSXsYcp8ncziE4XbiSS0q5OVfl4Bvk,ACB1F1,Gary Ittner
-0VzOqzpRnQ7j5tb5JTzrQimnC4qRVUW9L,A40288,Jim Jackson
 0BA1ZFia4Qmaez7BscxBZasRA2WGqYIng,A4F212,Joe Jackson
 0qEfjjT9S9UfKr8nWuXmQYaSKTq9oAZok,A23B00,Dieter Jaeger
 0Lb2ftYMhAYU7R64YHoJZ7uMoQfo53VpN,A03BE8,Skip Jenkyn
@@ -144,7 +136,6 @@ XML Feed ID,icao,name
 0fyvGuFRgA5eMUlvcgGAN82GWxyEyTAhq,A2A44F,Philip Jones
 07z7tarrqiUrb6LbqDlh1Z8uNgqPk29Eo,A8B175,Irwin Jousma
 0oMDzgBakAi2Rcb2VxabFJqKXiGQYgQ8x,A4AD52,William Kautter
-0A6o1Qyf5Lvqf1HiVqaFItTPPJbqWKCu3,A033F2,Richard Kebler
 0WNKfvb9kGs1OKEPeWQzPEnNvuBZa1WZ8,A0F069,Carl Keil
 0OPCJAzmdxoDWsvfDife7CVPtQTZkb5KC,A2F493,Richard Kellerman
 0mUajB7N1uKSDZdqd4bOC1e6AMfN1yMKW,A980BB,Thomas Kelley
@@ -159,7 +150,6 @@ XML Feed ID,icao,name
 02ycL6ZXWzT7L6DMZzrnGTdlM2GpK8RqH,A4ACD9,Michael Koerner
 0ogKifagG4uXIlGCDIb784EFpborixqii,A2537C,Boris Kubrak
 0yfiFZvF5Limuq8zDV0TWnfoGeTes0LE5,A008DA,Eric Lambert
-04VCq62W6VfhmA9V2tpsPNMzG7PYol441,A1934D,Louis Landucci
 0A8WE2DMR1E9qDtmNC85SDIIK8H1Fa2Ws,A2B62C,Stuart Larimore
 05aC4etvgbG2zv9mrSc6qhFWAMnpPEBbO,ACB29C,Tim Larsen
 0vSuurqla7O9gxYd8j9tpR5rnuVSjXaVb,A1ADCF,Stephen Layton
