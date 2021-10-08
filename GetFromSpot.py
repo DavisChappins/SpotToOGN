@@ -146,9 +146,14 @@ class getSPOT():
             self.timeUTC = time_UTC_str
             self.transmissionAge = age_s
 
-        except Exception as e:
-            #print(e)
-            print(user,'has no location messages')
+        except:
+            try:
+                if data['response']['errors']['error']['code'] == 'E-0195':
+                    print(user,'has no displayable messages')
+                else:
+                    print('***',user,'user not found')
+            except:
+                pass
             pass
 
 
