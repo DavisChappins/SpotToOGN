@@ -180,12 +180,12 @@ APRS_FILTER = 'g/ALL'
 traffic_list = []
 
 #Get most recent user list from Github
-urllib.request.urlretrieve("https://raw.githubusercontent.com/DavisChappins/SpotToOGN/main/user.csv", "user.csv")
-print('Downloading user.csv from https://raw.githubusercontent.com/DavisChappins/SpotToOGN/main/user.csv')
+urllib.request.urlretrieve("https://raw.githubusercontent.com/DavisChappins/SpotToOGN/main/Spotuser.csv", "Spotuser.csv")
+print('Downloading Spotuser.csv from https://raw.githubusercontent.com/DavisChappins/SpotToOGN/main/Spotuser.csv')
 time.sleep(2)
 
 #assign Github user list to user
-with open('user.csv', 'r') as read_obj:
+with open('Spotuser.csv', 'r') as read_obj:
     csv_reader = csv.reader(read_obj)
     user = list(csv_reader)
 #print(user)
