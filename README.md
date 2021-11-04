@@ -17,7 +17,8 @@ The script connects to http://glidern2.glidernet.org:14501/ ctrl+f for "SPOT" to
 
 ## What does it look like on a map?
 Go to https://glidertracker.org/ and find your location. SPOT position data is pushed to the OGN as an "unknown object" and will appear as a an earth icon. SPOT position data will be 5-15 minutes behind your actual location but will update every 10 minutes.  
-See below for an example.....tbd
+See below for an example  
+![SPOT on glidertracker.org](https://github.com/DavisChappins/SpotToOGN/blob/main/Images/spot1.JPG?raw=true)
 
 ## How does this script work?
 Every 3 minutes, this script parses the list of SPOT XML API positions contained in Spotuser.csv. If a position is found to be within the last 30 minutes, that position, timestamp,and  altitude are transmitted to the OGN servers to be displayed on any website that subscribes to OGN data. SPOT positions are transmitted as an "unknown" data type in order to not overwrite the "glider" data type. Some websites may reject "unknown" objects. Spotuser.csv contains your ICAO hex code so the same information that you entered at http://ddb.glidernet.org/ is carried over and displayed on your SPOT position.
