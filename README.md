@@ -1,6 +1,6 @@
 # SPOTToOGN
 This script grabs SPOT location data from [Spotuser.csv](https://github.com/DavisChappins/SpotToOGN/blob/main/Spotuser.csv) in this repository and uploads it to the OGN to be viewable on OGN sites like https://glidertracker.org/. For more information about the OGN see http://wiki.glidernet.org/.  
-It's currently running on my local machine from 9a to 8p AZ time, 7 days a week.
+It's currently running on my local machine 24 hrs a day, 7 days a week.
   
 ## How can I add my SPOT?
 First, [enable an XML feed](https://www.findmespot.com/en-us/support/spot-x/get-help/general/spot-api-support).  
