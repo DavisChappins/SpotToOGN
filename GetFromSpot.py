@@ -240,7 +240,7 @@ while True:
         
         for i in range(1,len(user)):
             SPOT = getSPOT(user[i][0])
-            time.sleep(1.5) #request of spot API to wait 2secs between API calls for multiple users
+            time.sleep(1.3) #request of spot API to wait 2secs between API calls for multiple users
             if SPOT.transmissionAge < 3000: #2000: #50 mins and recent, only
                 print('Tracking',user[i][2],SPOT.user,SPOT.transmissionAge,'seconds ago')
                 
