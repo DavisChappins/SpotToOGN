@@ -178,7 +178,7 @@ def openClient():
 #main
 
 
-APRS_SERVER_PUSH = 'glidern2.glidernet.org'
+APRS_SERVER_PUSH = 'glidern3.glidernet.org'
 APRS_SERVER_PORT =  14580 #10152
 APRS_USER_PUSH = 'SPOT'
 BUFFER_SIZE = 1024
